@@ -1,11 +1,11 @@
 {
-  "name": "use-life",
+  "name": "use-jinsei",
   "version": "0.0.0",
   "description": "Provides various custom hooks for React lifecycle",
   "private": false,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Dok6n/use-life.git"
+    "url": "git+https://github.com/Dok6n/use-jinsei.git"
   },
   "author": "Dok6n <ehrbs2018@gmail.com>",
   "license": "MIT",
