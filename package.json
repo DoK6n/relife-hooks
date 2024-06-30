@@ -21,6 +21,9 @@
   "publishConfig": {
     "access": "public"
   },
+  "files": [
+    "/dist"
+  ],
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
@@ -38,7 +41,8 @@
     "prebuild": "pnpm format && pnpm lint",
     "build": "tsup",
     "test": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "prepublishOnly": "pnpm build"
   },
   "peerDependencies": {
     "react": "^18.0.0",
