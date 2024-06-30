@@ -17,7 +17,7 @@ const compat = new FlatCompat({
 
 export default [
   {
-    ignores: ['**/dist', '**/.eslintrc.js', '**/dist', '**/node_modules', '**/*.config.ts'],
+    ignores: ['**/dist', '**/.eslintrc.js', '**/dist', '**/node_modules', '**/*.config.ts', '**/examples'],
   },
   ...fixupConfigRules(
     compat.extends(
@@ -48,6 +48,7 @@ export default [
           allowConstantExport: true,
         },
       ],
+      'react-hooks/exhaustive-deps': 'off',
     },
   },
 ]
