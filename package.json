@@ -1,11 +1,11 @@
 {
-  "name": "react-life",
+  "name": "relife-hooks",
   "version": "0.8.0",
   "description": "Provides various custom hooks for React lifecycle",
   "private": false,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Dok6n/react-life.git"
+    "url": "git+https://github.com/Dok6n/relife-hooks.git"
   },
   "author": "Dok6n <ehrbs2018@gmail.com>",
   "license": "MIT",
