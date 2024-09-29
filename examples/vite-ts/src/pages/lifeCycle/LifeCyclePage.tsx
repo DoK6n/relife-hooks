@@ -1,38 +1,24 @@
 import { useReducer, useState } from 'react'
-import './App.css'
 import {
-  useMountBeforePaint,
-  useUpdateBeforePaint,
-  useUnmountBeforePaint,
-  useMount,
-  useUpdate,
-  useUnmount,
   useMonitoringState,
-} from '../../../dist'
+  useMount,
+  useMountBeforePaint,
+  useUnmount,
+  useUnmountBeforePaint,
+  useUpdate,
+  useUpdateBeforePaint,
+} from '../../../../../dist'
+import Child from './ui/Child'
+import { RouteObject } from 'react-router-dom'
 
-function Child() {
-  useMountBeforePaint(() => {
-    console.log('Child mounted before paint')
-  })
-
-  useUnmountBeforePaint(() => {
-    console.log('Child unmounted before paint')
-  })
-
-  useMount(() => {
-    console.log('Child mounted')
-  })
-
-  useUnmount(() => {
-    console.log('Child unmounted')
-  })
-
-  return <div className='card'>Child</div>
+export const LifeCycleRoute: RouteObject = {
+  path: '/lifecycle',
+  element: <LifeCyclePage />,
 }
 
-function App() {
+export default function LifeCyclePage() {
   const [count, setCount] = useState(0)
-  const [isShow, toggle] = useReducer(prev => !prev, true)
+  const [isShow, toggle] = useReducer(state => !state, true)
 
   useMountBeforePaint(() => {
     console.log('Before paint')
@@ -74,5 +60,3 @@ function App() {
     </div>
   )
 }
-
-export default App
