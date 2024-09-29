@@ -1,6 +1,6 @@
 {
   "name": "relife-hooks",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "Provides various custom hooks for React lifecycle",
   "private": false,
   "repository": {
@@ -26,11 +26,14 @@
   ],
   "exports": {
     ".": {
-      "types": "./dist/types/index.d.ts",
-      "module": "./dist/esm/index.js",
-      "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js",
-      "default": "./dist/cjs/index.js"
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      },
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
     },
     "./package.json": "./package.json"
   },
