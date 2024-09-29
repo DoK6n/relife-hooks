@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import { use } from '../../../../../../dist'
+import { use } from 'relife-hooks'
 import { Post } from '../../../lib/model'
 import { styler } from '../../../lib/utils'
 

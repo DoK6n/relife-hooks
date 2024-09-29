@@ -7,7 +7,7 @@ import {
   useUnmountBeforePaint,
   useUpdate,
   useUpdateBeforePaint,
-} from '../../../../../dist'
+} from 'relife-hooks'
 import Child from './ui/Child'
 import { RouteObject } from 'react-router-dom'
 

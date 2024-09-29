@@ -1,9 +1,4 @@
-import {
-  useMount,
-  useMountBeforePaint,
-  useUnmount,
-  useUnmountBeforePaint,
-} from '../../../../../../dist'
+import { useMount, useMountBeforePaint, useUnmount, useUnmountBeforePaint } from 'relife-hooks'
 
 export default function Child() {
   useMountBeforePaint(() => {
