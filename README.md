@@ -29,6 +29,177 @@ yarn add react-life
 pnpm add react-life
 ```
 
+## Usage
+
+```tsx
+import { useReducer, useState } from 'react'
+import {
+  useMonitoringState,
+  useMount,
+  useMountBeforePaint,
+  useUnmount,
+  useUnmountBeforePaint,
+  useUpdate,
+  useUpdateBeforePaint,
+} from 'relife-hooks'
+
+export default function LifeCyclePage() {
+  const [count, setCount] = useState(0)
+  const [isShow, toggle] = useReducer(state => !state, true)
+
+  useMountBeforePaint(() => {
+    console.log('Before paint')
+  })
+
+  useUpdateBeforePaint(() => {
+    console.log('Before paint update')
+  }, [count])
+
+  useUnmountBeforePaint(() => {
+    console.log('Before paint unmount')
+  })
+
+  useMount(() => {
+    console.log('Mounted')
+  })
+
+  useUpdate(() => {
+    console.log('Updated')
+  }, [count])
+
+  useUnmount(() => {
+    console.log('Unmounted')
+  })
+
+  useMonitoringState(count)
+
+  return (
+    <div>
+      <h1>React Lifecycle Effects</h1>
+      <button onClick={() => setCount(count + 1)}>Increment ({count})</button>
+
+      <button onClick={toggle}>Toggle Child</button>
+      {isShow && <Child />}
+    </div>
+  )
+}
+```
+
+## useMount
+
+```tsx
+useMount(() => {
+  console.log('Mounted')
+})
+```
+
+@en
+
+- It is an effect that runs when the component is mounted, similar to using an empty array in the dependency array of useEffect. However, it is implemented to prevent it from being called twice in the development environment using Strict Mode, and to call it only once.
+
+@ko
+
+- useEffect의 의존성 배열에 빈배열을 넣은 것과 같이 컴포넌트가 마운트될 때 실행되는 효과입니다. 다만, Strict Mode 모드를 사용하는 개발환경에서 두번 실행되는 것을 방지하여 한번만 호출하도록 구현되어 있습니다.
+
+## useUnmount
+
+```tsx
+useUnmount(() => {
+  console.log('Unmounted')
+})
+```
+
+@en
+
+- It is an effect that runs when the component is unmounted, similar to returning a cleanup function in useEffect. However, it is implemented to prevent it from being called twice in the development environment using Strict Mode, and to call it only once.
+
+@ko
+
+- useEffect의 cleanup 함수를 반환하는 것과 같이 컴포넌트가 언마운트될 때 실행되는 효과입니다. 다만, Strict Mode 모드를 사용하는 개발환경에서 두번 실행되는 것을 방지하여 한번만 호출하도록 구현되어 있습니다.
+
+## useUpdate
+
+```tsx
+  const [count, setCount] = useState(0)
+
+  useUpdate(() => {
+    console.log('Updated')
+  }, [count])
+```
+
+@en
+
+- This effect runs whenever the specified state variables in the dependency array change, similar to using useEffect with state variables in its dependency array. It is implemented to prevent double execution in development environments using Strict Mode, ensuring it is called only once. [^1][^2]
+
+@ko
+
+- useEffect의 의존성 배열에 상태 변수를 넣은 것과 같이 해당 상태가 변경될 때마다 실행되는 효과입니다. 다만, Strict Mode 모드를 사용하는 개발환경에서 두번 실행되는 것을 방지하여 한번만 호출하도록 구현되어 있습니다.
+
+## useMountBeforePaint
+
+```tsx
+useMountBeforePaint(() => {
+  console.log('Before paint')
+})
+```
+
+@en
+
+- It is an effect that runs before the browser paints the screen, similar to using an empty array in the dependency array of useLayoutEffect. However, it is implemented to prevent it from being called twice in the development environment using Strict Mode, and to call it only once.
+
+@ko
+
+- useLayoutEffect의 의존성 배열에 빈배열을 넣은 것과 같이 브라우저가 화면을 그리기 전에 마운트될 때 실행되는 효과입니다. 다만, Strict Mode 모드를 사용하는 개발환경에서 두번 실행되는 것을 방지하여 한번만 호출하도록 구현되어 있습니다.
+
+## useUnmountBeforePaint
+
+```tsx
+useUnmountBeforePaint(() => {
+  console.log('Before paint unmount')
+})
+```
+
+@en
+
+- It is an effect that runs when the component is unmounted before the browser paints the screen, similar to returning a cleanup function in useLayoutEffect. However, it is implemented to prevent it from being called twice in the development environment using Strict Mode, and to call it only once.
+
+@ko
+
+- useLayoutEffect의 cleanup 함수를 반환하는 것과 같이 브라우저가 화면을 그리기 전에 컴포넌트가 언마운트될 때 실행되는 효과입니다. 다만, Strict Mode 모드를 사용하는 개발환경에서 두번 실행되는 것을 방지하여 한번만 호출하도록 구현되어 있습니다.
+
+## useUpdateBeforePaint
+
+```tsx
+useUpdateBeforePaint(() => {
+  console.log('Before paint update')
+}, [count])
+```
+
+@en
+
+- This effect runs whenever the specified state variables in the dependency array change, similar to using useLayoutEffect with state variables in its dependency array. It is implemented to prevent double execution in development environments using Strict Mode, ensuring it is called only once.
+
+@ko
+
+- useLayoutEffect의 의존성 배열에 상태 변수를 넣은 것과 같이 해당 상태가 변경될 때마다 실행되는 효과입니다. 다만, Strict Mode 모드를 사용하는 개발환경에서 두번 실행되는 것을 방지하여 한번만 호출하도록 구현되어 있습니다.
+
+
+## useMonitoringState
+
+```tsx
+useMonitoringState(count)
+```
+
+@en
+
+- This effect logs the previous and new values of a state variable whenever it changes. The output format is similar to that of `redux-logger`.
+
+@ko
+
+- 상태변수가 변경될 때마다 이전 값과 새로운 값을 로그로 출력하는 효과입니다. `redux-logger`와 유사한 형태로 출력됩니다.
+
+---
+
 ## build size
 
 ```sh
